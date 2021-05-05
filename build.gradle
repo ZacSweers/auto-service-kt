@@ -1,0 +1,58 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:${dokka_version}"
+        classpath "com.vanniktech:gradle-maven-publish-plugin:${maven_publish_plugin_version}"
+        classpath "org.jetbrains.kotlinx:binary-compatibility-validator:${binary_validator_version}"
+    }
+}
+
+apply plugin: "binary-compatibility-validator"
+
+String resolvedJvmTarget = System.getenv().getOrDefault("ci_java_version", "1.8")
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
+        project.tasks.withType(KotlinCompile).configureEach {
+            kotlinOptions {
+                jvmTarget = resolvedJvmTarget
+                freeCompilerArgs += ['-progressive', '-Xjvm-default=all']
+            }
+        }
+    }
+
+    pluginManager.withPlugin("org.jetbrains.kotlin.android") {
+        project.tasks.withType(KotlinCompile).configureEach {
+            kotlinOptions {
+                jvmTarget = resolvedJvmTarget
+                freeCompilerArgs += ['-progressive', '-Xjvm-default=all']
+            }
+        }
+    }
+
+    pluginManager.withPlugin("org.jetbrains.dokka") {
+        tasks.named("dokkaHtml") {
+            outputDirectory.set(rootProject.file("docs/0.x"))
+            dokkaSourceSets.configureEach {
+                skipDeprecated.set(true)
+
+                // Suppress a package
+//                perPackageOption {
+//                    matchingRegex.set(/.*\.internal.*/)
+//                    suppress.set(true)
+//                }
+            }
+        }
+    }
+}
