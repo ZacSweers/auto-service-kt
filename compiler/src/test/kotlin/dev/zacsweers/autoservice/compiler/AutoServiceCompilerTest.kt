@@ -86,7 +86,6 @@ class AutoServiceCompilerTest {
         .apply {
           workingDir = temporaryFolder.root
           compilerPlugins = listOf(AutoServiceComponentRegistrar())
-          useIR = false
           inheritClassPath = true
           val processor = AutoServiceCommandLineProcessor()
           commandLineProcessors = listOf(processor)
@@ -97,6 +96,7 @@ class AutoServiceCompilerTest {
               optionValue = temporaryFolder.newFolder("serviceOutput").absolutePath
             )
           )
+          useOldBackend = true
           inheritClassPath = true
           sources = sourceFiles.asList() + autoService
           verbose = false
