@@ -3,22 +3,28 @@ apply plugin: "org.jetbrains.kotlin.jvm"
 apply plugin: 'org.jetbrains.dokka'
 apply plugin: "com.vanniktech.maven.publish"
 
-//region Version.kt template for setting the project version in the build
+//region BuildConstants.kt template for setting the project version in the build
 sourceSets {
-  main.java.srcDirs += "$buildDir/generated/sources/version-templates/kotlin/main"
+  main.java.srcDirs += "$buildDir/generated/sources/templates/kotlin/main"
 }
 
-TaskProvider copyVersionTemplatesProvider = tasks.register("copyVersionTemplates", Copy) {
+TaskProvider copyTemplatesProvider = tasks.register("copyTemplates", Copy) {
   it.inputs.property("version", VERSION_NAME)
-  from project.layout.projectDirectory.dir("version-templates")
-  into project.layout.buildDirectory.dir("generated/sources/version-templates/kotlin/main")
-  expand('projectVersion': "${VERSION_NAME}")
+  it.inputs.property("asVersion", autoservice_version)
+  it.inputs.property("group", GROUP)
+  from project.layout.projectDirectory.dir("templates")
+  into project.layout.buildDirectory.dir("generated/sources/templates/kotlin/main")
+  expand(
+      'projectGroup': "${GROUP}",
+      'autoServiceVersion': "${autoservice_version}",
+      'projectVersion': "${VERSION_NAME}"
+  )
   filteringCharset = 'UTF-8'
 }
 //endregion
 
 compileKotlin {
-  dependsOn copyVersionTemplatesProvider
+  dependsOn copyTemplatesProvider
 }
 
 gradlePlugin {
