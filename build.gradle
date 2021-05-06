@@ -29,14 +29,8 @@ allprojects {
                 jvmTarget = resolvedJvmTarget
                 freeCompilerArgs += ['-progressive', '-Xjvm-default=all']
             }
-        }
-    }
-
-    pluginManager.withPlugin("org.jetbrains.kotlin.android") {
-        project.tasks.withType(KotlinCompile).configureEach {
-            kotlinOptions {
-                jvmTarget = resolvedJvmTarget
-                freeCompilerArgs += ['-progressive', '-Xjvm-default=all']
+            kotlin {
+                explicitApi()
             }
         }
     }

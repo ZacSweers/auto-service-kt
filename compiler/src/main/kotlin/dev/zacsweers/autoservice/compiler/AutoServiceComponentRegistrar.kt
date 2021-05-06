@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.resolve.jvm.extensions.AnalysisHandlerExtension
 import java.io.File
 
 @AutoService(ComponentRegistrar::class)
-class AutoServiceComponentRegistrar : ComponentRegistrar {
+public class AutoServiceComponentRegistrar : ComponentRegistrar {
   override fun registerProjectComponents(
     project: MockProject,
     configuration: CompilerConfiguration

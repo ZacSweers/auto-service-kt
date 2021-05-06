@@ -13,7 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:JvmName("Version")
+@file:JvmName("BuildConstants")
 package dev.zacsweers.autoservice.gradle
 
-internal const val VERSION = "$projectVersion"
+internal object BuildConstants {
+  const val GROUP = "$projectGroup"
+  const val PROJECT_VERSION = "$projectVersion"
+  const val AUTO_SERVICE_VERSION = "$autoServiceVersion"
+}
