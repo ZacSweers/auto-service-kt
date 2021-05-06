@@ -96,7 +96,6 @@ class AutoServiceCompilerTest {
               optionValue = temporaryFolder.newFolder("serviceOutput").absolutePath
             )
           )
-          useOldBackend = true
           inheritClassPath = true
           sources = sourceFiles.asList() + autoService
           verbose = false
