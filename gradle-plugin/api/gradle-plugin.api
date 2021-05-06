@@ -1,3 +1,8 @@
+public abstract class dev/zacsweers/autoservice/gradle/AutoServiceExtension {
+	public fun <init> (Lorg/gradle/api/model/ObjectFactory;)V
+	public final fun getAutoServiceVersion ()Lorg/gradle/api/provider/Property;
+}
+
 public final class dev/zacsweers/autoservice/gradle/AutoServiceGradleSubplugin : org/jetbrains/kotlin/gradle/plugin/KotlinCompilerPluginSupportPlugin {
 	public fun <init> ()V
 	public synthetic fun apply (Ljava/lang/Object;)V

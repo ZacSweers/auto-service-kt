@@ -5,8 +5,6 @@ public final class dev/zacsweers/autoservice/compiler/AutoServiceAnalysisHandler
 }
 
 public final class dev/zacsweers/autoservice/compiler/AutoServiceCommandLineProcessor : org/jetbrains/kotlin/compiler/plugin/CommandLineProcessor {
-	public static final field COMPILER_PLUGIN_ID Ljava/lang/String;
-	public static final field Companion Ldev/zacsweers/autoservice/compiler/AutoServiceCommandLineProcessor$Companion;
 	public fun <init> ()V
 	public fun appendList (Lorg/jetbrains/kotlin/config/CompilerConfiguration;Lorg/jetbrains/kotlin/config/CompilerConfigurationKey;Ljava/lang/Object;)V
 	public fun appendList (Lorg/jetbrains/kotlin/config/CompilerConfiguration;Lorg/jetbrains/kotlin/config/CompilerConfigurationKey;Ljava/util/List;)V
@@ -15,10 +13,6 @@ public final class dev/zacsweers/autoservice/compiler/AutoServiceCommandLineProc
 	public fun getPluginOptions ()Ljava/util/Collection;
 	public fun processOption (Lorg/jetbrains/kotlin/compiler/plugin/AbstractCliOption;Ljava/lang/String;Lorg/jetbrains/kotlin/config/CompilerConfiguration;)V
 	public fun processOption (Lorg/jetbrains/kotlin/compiler/plugin/CliOption;Ljava/lang/String;Lorg/jetbrains/kotlin/config/CompilerConfiguration;)V
-}
-
-public final class dev/zacsweers/autoservice/compiler/AutoServiceCommandLineProcessor$Companion {
-	public final fun getOUTPUT_DIR_OPTION ()Lorg/jetbrains/kotlin/compiler/plugin/CliOption;
 }
 
 public final class dev/zacsweers/autoservice/compiler/AutoServiceComponentRegistrar : org/jetbrains/kotlin/compiler/plugin/ComponentRegistrar {
