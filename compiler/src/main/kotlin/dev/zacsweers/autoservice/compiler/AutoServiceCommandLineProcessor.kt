@@ -12,33 +12,27 @@ internal const val srcGenDirName = "src-gen-dir"
 internal val srcGenDirKey = CompilerConfigurationKey.create<String>("autoservice $srcGenDirName")
 
 @AutoService(CommandLineProcessor::class)
-class AutoServiceCommandLineProcessor : CommandLineProcessor {
-  companion object {
-    const val COMPILER_PLUGIN_ID: String = "dev.zacsweers.autoservice"
+public class AutoServiceCommandLineProcessor : CommandLineProcessor {
 
-    // TODO verify and verbose?
-    val OUTPUT_DIR_OPTION: CliOption =
-      CliOption(
-        optionName = srcGenDirName,
-        valueDescription = "<file-path>",
-        description = "Path to directory service files should be generated into",
-        required = true,
-        allowMultipleOccurrences = false
-      )
-  }
+  override val pluginId: String = "dev.zacsweers.autoservice.compiler"
 
-  override val pluginId: String
-    get() = COMPILER_PLUGIN_ID
-
-  override val pluginOptions: Collection<CliOption>
-    get() = listOf(OUTPUT_DIR_OPTION)
-//        get() = listOf()
+  // TODO verify and verbose?
+  override val pluginOptions: Collection<AbstractCliOption> = listOf(
+    CliOption(
+      optionName = srcGenDirName,
+      valueDescription = "<file-path>",
+      description = "Path to directory service files should be generated into",
+      required = true,
+      allowMultipleOccurrences = false
+    )
+  )
 
   override fun processOption(
     option: AbstractCliOption,
     value: String,
     configuration: CompilerConfiguration
   ) {
+    println("Processing option $option with value $value")
     when (val optionName = option.optionName) {
       srcGenDirName -> configuration.put(srcGenDirKey, value)
       else -> throw CliOptionProcessingException("Unknown option: $optionName")

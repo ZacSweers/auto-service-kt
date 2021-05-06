@@ -31,7 +31,7 @@ import java.io.File
 import java.io.IOException
 import java.util.SortedSet
 
-class AutoServiceAnalysisHandlerExtension(
+public class AutoServiceAnalysisHandlerExtension(
   private val compilerConfiguration: CompilerConfiguration,
   private val codeGenDir: File
 ) : AnalysisHandlerExtension {
