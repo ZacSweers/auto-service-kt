@@ -32,7 +32,6 @@ public class AutoServiceCommandLineProcessor : CommandLineProcessor {
     value: String,
     configuration: CompilerConfiguration
   ) {
-    println("Processing option $option with value $value")
     when (val optionName = option.optionName) {
       srcGenDirName -> configuration.put(srcGenDirKey, value)
       else -> throw CliOptionProcessingException("Unknown option: $optionName")
