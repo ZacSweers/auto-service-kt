@@ -10,9 +10,23 @@ import org.jetbrains.kotlin.config.JvmTarget
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
 import java.io.File
 
-class AutoServiceCompilerTest {
+@RunWith(Parameterized::class)
+class AutoServiceCompilerTest(private val useOldBackend: Boolean)  {
+
+  companion object {
+    @JvmStatic
+    @Parameterized.Parameters(name = "useOldBackend={0}")
+    fun data(): Collection<Array<Any>> {
+      return listOf(
+        arrayOf(true),
+        arrayOf(false)
+      )
+    }
+  }
 
   @Rule
   @JvmField
@@ -96,6 +110,7 @@ class AutoServiceCompilerTest {
               optionValue = temporaryFolder.newFolder("serviceOutput").absolutePath
             )
           )
+          useOldBackend = this@AutoServiceCompilerTest.useOldBackend
           inheritClassPath = true
           sources = sourceFiles.asList() + autoService
           verbose = false
