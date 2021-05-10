@@ -92,7 +92,7 @@ public class AutoServiceGradleSubplugin : KotlinCompilerPluginSupportPlugin {
     project: Project,
     extension: AutoServiceExtension
   ) {
-    val autoServiceAnnotationsDepProvider = extension.autoServiceVersion.map {
+    val autoServiceAnnotationsDepProvider = extension.annotationsVersion.map {
       "com.google.auto.service:auto-service-annotations:$it"
     }
     project.dependencies.add("implementation", autoServiceAnnotationsDepProvider)
@@ -102,6 +102,6 @@ public class AutoServiceGradleSubplugin : KotlinCompilerPluginSupportPlugin {
 /** Configuration for the AutoService Gradle Plugin. */
 public abstract class AutoServiceExtension @Inject constructor(objects: ObjectFactory) {
   /** Specifies the version of auto-service-annotations to use. */
-  public val autoServiceVersion: Property<String> = objects.property(String::class.java)
+  public val annotationsVersion: Property<String> = objects.property(String::class.java)
     .convention(BuildConstants.AUTO_SERVICE_VERSION)
 }

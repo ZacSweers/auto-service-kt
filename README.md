@@ -1,12 +1,40 @@
-auto-service-kt
-===============
+# auto-service-kt
 
-WIP
+A Kotlin compiler plugin implementation of [AutoService](https://github.com/google/auto/tree/master/service).
+
+## Usage
+
+Simply add the auto-service-kt Gradle Plugin.
+
+[![Maven Central](https://img.shields.io/maven-central/v/dev.zacsweers.autoservice/gradle-plugin.svg)](https://mvnrepository.com/artifact/dev.zacsweers.autoservice/gradle-plugin)
+```kotlin
+plugins {
+  id("dev.zacsweers.autoservice") version "<version>"
+  // ...
+}
+
+// Optional if you want to force a newer AutoService annotations version
+autoService {
+  annotationsVersion.set("1.0")
+}
+```
+
+Then annotate your service implementation with `@AutoService` as your normally would in source 
+files.
+
+## Caveats
+
+While the AutoService _annotation processor_ will merge existing service files, but this is not
+currently implemented in this plugin yet.
+
+AutoService's `verify` and `verbose` options are also not yet implemented.
+
+Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
 
 License
--------
+--------
 
-    Copyright (C) 2021 Zac Sweers
+    Copyright 2021 Zac Sweers
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -20,4 +48,5 @@ License
     See the License for the specific language governing permissions and
     limitations under the License.
 
- [snapshots]: https://oss.sonatype.org/content/repositories/snapshots/
+
+[snap]: https://oss.sonatype.org/content/repositories/snapshots/dev/zacsweers/autoservice/
