@@ -20,7 +20,7 @@ public class AutoServiceComponentRegistrar : ComponentRegistrar {
       newConfiguration.put(JVMConfigurationKeys.OUTPUT_DIRECTORY, dir)
     }
     val sourceGenFolder = File(newConfiguration.getNotNull(srcGenDirKey))
-    val extension = AutoServiceAnalysisHandlerExtension(newConfiguration, sourceGenFolder)
+    val extension = AutoServiceAnalysisHandlerExtension(sourceGenFolder)
     AnalysisHandlerExtension.registerExtension(project, extension)
   }
 }
